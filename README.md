@@ -21,9 +21,9 @@ A simple shooter game built using Python and Pygame.
 
 ## Usage
 Run the game using the following command:
-    ```sh
-    uv run [main.py](https://github.com/tariq-k-dev/simple-shooter-game)
-    ```
+```sh
+uv run [main.py](https://github.com/tariq-k-dev/simple-shooter-game)
+```
 
 ## Features
 - Basic game window setup
