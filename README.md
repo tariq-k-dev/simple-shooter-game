@@ -11,7 +11,7 @@ A simple shooter game built using Python and Pygame.
 
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/tariq-k-dev/simple-shooter-game.git
    cd simple-shooter-game
    ```
 2. Install dependencies using uv:
