@@ -3,6 +3,11 @@ import sys
 import random
 
 
+# Collision detection function
+def check_collision(rect1, rect2):
+    return rect1.colliderect(rect2)
+
+
 def main():
     # Initialize PyGame
     pygame.init()
@@ -79,6 +84,14 @@ def main():
 
         for enemy in enemies:
             enemy.y += enemy_speed
+
+        # Check for collisions
+        for bullet in bullets[:]:
+            for enemy in enemies[:]:
+                if check_collision(bullet, enemy):
+                    bullets.remove(bullet)
+                    enemies.remove(enemy)
+                    break
 
         # Remove enemies that are off the screen
         enemies = [enemy for enemy in enemies if enemy.y < screen_height]
