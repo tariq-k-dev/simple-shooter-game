@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 
 
 def main():
@@ -27,6 +28,16 @@ def main():
     bullet_height = 10
     bullet_speed = 7
     bullets = []
+
+    # Enemy settings
+    enemy_width = 50
+    enemy_height = 60
+    enemy_speed = 2
+    enemies = []
+
+    # Spawn an enemy every 2 seconds
+    enemy_timer = 0
+    enemy_spawn_time = 2000
 
     # Main game loop
     while True:
@@ -57,6 +68,21 @@ def main():
         # Remove bullets that are off the screen
         bullets = [bullet for bullet in bullets if bullet.y > 0]
 
+        # Update enemy positions and spawn new ones
+        current_time = pygame.time.get_ticks()
+        if current_time - enemy_timer > enemy_spawn_time:
+            enemy_x = random.randint(0, screen_width - enemy_width)
+            enemy_y = -enemy_height
+            enemies.append(pygame.Rect(
+                enemy_x, enemy_y, enemy_width, enemy_height))
+            enemy_timer = current_time
+
+        for enemy in enemies:
+            enemy.y += enemy_speed
+
+        # Remove enemies that are off the screen
+        enemies = [enemy for enemy in enemies if enemy.y < screen_height]
+
         # Fill the screen with a color (black in this case)
         screen.fill((0, 0, 0))
 
@@ -67,6 +93,10 @@ def main():
         # Draw the bullets
         for bullet in bullets:
             pygame.draw.rect(screen, (255, 255, 255), bullet)
+
+        # Draw the enemies
+        for enemy in enemies:
+            pygame.draw.rect(screen, (255, 0, 0), enemy)
 
         # Update the display
         pygame.display.flip()
